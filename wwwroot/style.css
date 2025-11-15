@@ -1,0 +1,115 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #2A7B9B;
+    background: linear-gradient(90deg, #2A7B9B 0%, #3C91AF 50%, #A2CFE0 100%);
+  margin: 0;
+  padding: 20px;
+}
+.container {
+  max-width: 600px;
+  background: white;
+  margin: auto;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header .icon {
+  font-size: 35px;
+  color: #4a90e2;
+}
+
+.header h1 {
+  font-size: 22px;
+  margin: 0;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #f0f0f0;
+}
+
+h2 {
+  margin-top: 30px;
+  font-size: 18px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+table th,
+table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.status {
+  font-weight: bold;
+}
+
+.status.aberto {
+  color: #3b82f6;
+}
+
+.status.andamento {
+  color: #f59e0b;
+}
+
+.status.fechado {
+  color: #10b981;
+}
+
+/* Container para posicionar o botão no canto direito */
+.voltar-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Botão Voltar estilizado */
+.btn-voltar {
+  background-color: #2ca3a0;
+  color: white;
+  border: none;
+  border-radius: 40px;
+  padding: 10px 25px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+/* Efeito hover */
+.btn-voltar:hover {
+  background-color: transparent;
+  color: #2ca3a0;
+  border: 2px solid #2ca3a0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de Chamado e Consulta</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="icon">&#128222;</div>
+      <h1>Sistema de Chamado e Consulta</h1>
+    </div>
+
+    <div class="buttons">
+      <button class="btn">+ Novo Chamado</button>
+      <button class="btn">📅 Nova Consulta</button>
+    </div>
+
+    <h2>Chamados</h2>
+    <table id="tabelaChamados">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Data</th>
+          <th>Assunto</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="listaChamados">
+        <tr>
+          <td colspan="4" style="text-align:center;">Carregando...</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="voltar-container">
+      <button class="btn-voltar">← Voltar</button>
+    </div>
+  </div>
+
+  <script>
+    // URL base da API
+    const API_URL = "http://localhost:5000/api/Chamados";
+
+    // Função para carregar os chamados da API
+    async function carregarChamados() {
+      const corpoTabela = document.getElementById("listaChamados");
+      corpoTabela.innerHTML = "<tr><td colspan='4' style='text-align:center;'>Carregando...</td></tr>";
+
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error("Falha ao obter dados da API");
+
+        const dados = await response.json();
+
+        if (dados.length === 0) {
+          corpoTabela.innerHTML = "<tr><td colspan='4' style='text-align:center;'>Nenhum chamado encontrado</td></tr>";
+          return;
+        }
+
+        // Monta as linhas da tabela
+        corpoTabela.innerHTML = "";
+        dados.forEach((item, index) => {
+          const statusClass =
+            item.status?.toLowerCase() === "aberto"
+              ? "aberto"
+              : item.status?.toLowerCase() === "fechado"
+                ? "fechado"
+                : "andamento";
+
+          const linha = `
+            <tr>
+              <td>${index + 1}</td>
+              <td>${new Date(item.dataAbertura || item.data || new Date()).toLocaleDateString()}</td>
+              <td>${item.titulo || item.assunto || "—"}</td>
+              <td class="status ${statusClass}">${item.status || "—"}</td>
+            </tr>`;
+          corpoTabela.insertAdjacentHTML("beforeend", linha);
+        });
+      } catch (erro) {
+        console.error("Erro ao carregar chamados:", erro);
+        corpoTabela.innerHTML =
+          "<tr><td colspan='4' style='text-align:center;color:red;'>Erro ao conectar à API</td></tr>";
+      }
+    }
+
+    // Chama a função quando a página carregar
+    window.onload = carregarChamados;
+  </script>
+</body>
+
+</html>
